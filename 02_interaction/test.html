@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+			<meta charset="utf-8" />
+			<title>INTERACTIVITY TEST </title>
+			<link rel="stylesheet" type="text/css" href="main.css" />
+			<script src="pixi.js"></script>
+	</head>
+	<body>
+		<script>
+			// instance
+			var interactive = true;
+			var stage = new PIXI.Stage(0xFF6699, interactive);
+			
+			// renderer
+			var renderer ; // used in rendering + animate 
+			rendering();
+			
+			
+			
+			
+			// assets 
+			
+			
+			
+			var texture = PIXI.Texture.fromImage("square_grey.png");
+			var s = new PIXI.Sprite(texture);
+			
+			
+			
+			
+			// assets placement
+			s.scale.x = s.scale.y = 0.8;
+			s.anchor.x = 0.5;
+			s.anchor.y = 0.5;
+			s.position.x = 200;
+			s.position.y = 150;
+			
+			
+			
+			// asset interactivity
+			s._interactive=true;
+			
+			s.mouseover = function(data) {
+				console.log("mouse is over ");
+				this.alpha = 0.5;
+			}
+			
+			
+			s.mousedown = s.touchstart = function(data) {
+				console.log("mouse is down");
+				this.isdown = true;
+				this.scale.x=this.scale.y = 1;
+			}
+			
+			s.mouseup=s.touchend=function(data) {
+				console.log("mouse is up" );
+				this.isdown= false ;
+				this.scale.x=this.scale.y= 0.8;
+			}
+			
+			// !! watch out for mousedown and getting over !!!
+			s.mouseout = function(data) {
+				console.log("mouse is out " ); 
+				this.alpha = 1;
+				if(this.isdown==true ) { this.scale.x=this.scale.y= 0.8 ; }
+				
+			}
+			
+			
+			
+			
+			
+			
+			stage.addChild(s);
+			
+			
+			
+			
+			
+			
+			
+			//***********//
+			// functions //
+			//***********//
+			
+			
+			// =>animate 
+			function animate() {
+				requestAnimFrame(animate);
+				
+				// effects
+				
+				//render
+				renderer.render(stage);
+			}
+			
+			// setting canvas 
+			function rendering() {
+				renderer = PIXI.autoDetectRenderer(window.screen.availWidth,window.screen.availHeight);
+				console.log("screen (height,width) : ("+window.screen.availWidth+","+window.screen.availHeight+")");
+				// add -> DOM
+				document.body.appendChild(renderer.view);
+				requestAnimFrame(animate);
+			}
+			
+			
+			
+			// asset managements . 
+			var senjs = function () {
+				
+			}
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

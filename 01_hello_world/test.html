@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+			<meta charset="utf-8" />
+			<link rel="stylesheet" type="text/css" href="main.css" />
+			<script src="pixi.js"></script>
+	</head>
+	<body>
+		<script>
+			// instance
+			var stage = new PIXI.Stage(0xFF6600);
+			
+			// renderer
+			var renderer = PIXI.autoDetectRenderer(400,300);
+			
+			// add -> DOM
+			document.body.appendChild(renderer.view);
+			
+			// assets 
+			var texture = PIXI.Texture.fromImage("square_grey.png");
+			var s = new PIXI.Sprite(texture);
+			
+			// assets placement
+			s.scale.x = s.scale.y = 0.8;
+			s.anchor.x = 0.5;
+			s.anchor.y = 0.5;
+			s.position.x = 200;
+			s.position.y = 150;
+			
+			// blending mode 
+			//s.blendMode = PIXI.blendModes.ADD;
+			
+			
+			
+			stage.addChild(s);
+			
+			requestAnimFrame(animate);
+			
+			
+			
+			
+			
+			
+			
+			// animate 
+			function animate() {
+				requestAnimFrame(animate);
+				
+				// effects
+				
+				//render
+				renderer.render(stage);
+			}
+			
+			
+		</script>
+	</body>
+</html>
